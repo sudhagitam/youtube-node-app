@@ -3,14 +3,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(videos => {
             const feed = document.getElementById('video-feed');
-            feed.innerHTML = ''; // Clear the "Loading..." text
+            if (!feed) return;
+            feed.innerHTML = ''; // Clear "Loading..." text
 
             if (videos.length === 0) {
                 feed.innerHTML = "<h2 style='text-align:center;'>No videos available.</h2>";
                 return;
             }
 
-            // Loop through each video and create a player for it
+            // Optional: If index.html should only show the latest video,
+            // sort or slice. Otherwise, loop through all.
             videos.forEach(v => {
                 const wrapper = document.createElement('div');
                 wrapper.className = 'video-wrapper';

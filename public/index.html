@@ -300,17 +300,72 @@
         }
 
         @media (max-width: 700px) {
+            body {
+                padding: 0;
+            }
+
             header {
+                padding-top: 18px;
                 flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .nav-link,
+            .archive-link {
+                font-size: 0.95rem;
             }
 
             .brand {
                 order: 2;
                 width: 100%;
+                font-size: 1.1rem;
+                letter-spacing: 0.06em;
+            }
+
+            .hero {
+                padding: 20px 14px 10px;
             }
 
             .hero-card {
-                padding: 28px 20px;
+                padding: 24px 18px;
+                border-radius: 16px;
+            }
+
+            .hero p {
+                font-size: 0.98rem;
+                line-height: 1.7;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .primary-btn,
+            .secondary-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .media-section,
+            .info-grid,
+            .community-grid,
+            .container,
+            .footer-grid {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .card {
+                padding: 18px 16px;
+            }
+
+            .video-wrapper {
+                padding: 14px;
+            }
+
+            .video-title {
+                font-size: 1.1rem;
             }
 
             .media-header {
@@ -340,7 +395,7 @@
 
     <section class="media-section">
         <div class="media-header">
-            <h3>Current Bible Study Series - Latest Lesson</h3>
+            <h3>Current Bible Study Series - Latest Lessons</h3>
         </div>
 
         <main class="container" id="video-feed">
@@ -420,8 +475,10 @@
                     return;
                 }
 
-                videos.sort((a, b) => b.title.localeCompare(a.title));
-                const lastVideo = videos[0];
+                const bibleTeachingVideos = videos.filter(v => v.playlist === 'Bible Teaching');
+                const featuredVideos = bibleTeachingVideos.length ? bibleTeachingVideos : videos;
+                featuredVideos.sort((a, b) => b.title.localeCompare(a.title));
+                const lastVideo = featuredVideos[0];
 
                 const wrapper = document.createElement('div');
                 wrapper.className = 'video-wrapper';
